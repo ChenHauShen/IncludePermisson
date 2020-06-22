@@ -16,14 +16,18 @@ import java.util.logging.Logger;
  * @date : 2020-06-22 18:56
  **/
 public class ImportEvent {
-	Logger logger = Logger.getLogger(this.getClass().getName());
 
+	/**
+	 * 导入权限
+	 * 	TODO: ChenhaoShen 2020-06-22 在Windows环境下的服务器启动时会锁定权限文件,导致文件不可写
+	 * @param sender CommandSender
+	 * @param permissionDirPath 权限文件路径
+	 * @param pluginPath 插件文件夹
+	 * @return
+	 */
 	public boolean includePermission(CommandSender sender, String permissionDirPath, String pluginPath) {
-
 			//获取权限文件列表
 			List<String> fileList = FileUtil.traverseDir(permissionDirPath);
-			logger.info("已获取" + fileList.size() + "个权限组文件");
-			logger.info(fileList.toString());
 			//获取每一个文件的内容
 			for (int i = 0; i < fileList.size(); i++) {
 				//获取文件名(文件名=权限组名称)
@@ -31,17 +35,14 @@ public class ImportEvent {
 				//获取权限列表
 				List<String> permissionList = FileUtil.parsePermissionFile(fileList.get(i));
 				//解析每一个权限
-				logger.info("解析到" + permissionGroup + "共" + permissionList.size() + "条权限数据");
 				for (int j = 0; j < permissionList.size(); j++) {
 					//执行控制台命令来添加权限
 					String command = "lp group " + permissionGroup + " permission set " + permissionList.get(j);
 					Bukkit.dispatchCommand(sender, command);
-					logger.info("已添加" + permissionList.get(j) + "权限到" + permissionGroup);
 				}
+				//TODO: ChenhaoShen 2020-06-22 这什么鬼东西？怎么不生效???
 				//移动文件到已添加目录
-				logger.info("移动"+ fileList.get(i) + "到" + pluginPath + File.separator + "done" + File.separator + permissionGroup);
-				FileUtil.moveFile(fileList.get(i), pluginPath + File.separator + "done" + File.separator + permissionGroup);
-				logger.info("已移动添加过的权限文件");
+				//FileUtil.moveFile(fileList.get(i), pluginPath + File.separator + "done" + File.separator + permissionGroup);
 			}
 			return true;
 	}

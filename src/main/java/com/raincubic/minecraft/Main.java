@@ -24,6 +24,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		//初始化创建文件夹
 		InitialEvent.createFolder(pluginPath);
 		getLogger().info("IncludePermission已加载");
 	}

@@ -15,15 +15,13 @@ public class InitialEvent {
 	public static void createFolder(String dataFolderPath) {
 		File pluginFolder = new File(dataFolderPath);
 		File permissionFolder = new File(dataFolderPath + File.separator + "permissions");
-		File doneFolder = new File(dataFolderPath + File.separator + "done");
+		//暂时删除创建done文件夹的操作
+		//File doneFolder = new File(dataFolderPath + File.separator + "done");
 		if (!pluginFolder.exists()) {
 			pluginFolder.mkdirs();
 			permissionFolder.mkdirs();
-			doneFolder.mkdirs();
 		} else if (!permissionFolder.exists()) {
 			permissionFolder.mkdirs();
-		} else if (!doneFolder.exists()) {
-			doneFolder.mkdirs();
 		}
 	}
 }
