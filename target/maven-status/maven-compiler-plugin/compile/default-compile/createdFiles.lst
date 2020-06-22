@@ -1,0 +1,4 @@
+com\raincubic\minecraft\event\InitialEvent.class
+com\raincubic\minecraft\Main.class
+com\raincubic\minecraft\event\ImportEvent.class
+com\raincubic\minecraft\util\FileUtil.class
