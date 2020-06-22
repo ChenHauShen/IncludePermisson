@@ -43,6 +43,8 @@ public class ImportEvent {
 				//TODO: ChenhaoShen 2020-06-22 这什么鬼东西？怎么不生效???
 				//移动文件到已添加目录
 				//FileUtil.moveFile(fileList.get(i), pluginPath + File.separator + "done" + File.separator + permissionGroup);
+				//更新LP权限
+				Bukkit.dispatchCommand(sender, "lp networksync");
 			}
 			return true;
 	}
